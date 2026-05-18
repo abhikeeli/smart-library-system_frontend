@@ -41,6 +41,8 @@ const BookCard = ({ book, user ,onBorrowSuccess}) => {
     <div style={cardStyle(isLocked)}>
       {isLocked && <div style={lockBadge}>🔒 Restricted</div>}
       <h3>{book.title}</h3>
+      <h5>author : {book.author} </h5>
+      <p> category :{book.category}</p>
       <p>Tier: {book.requiredTier} | Req: {minScore} pts</p>
       <p>Availble: {book.availableCopies}</p>
       {isLocked ? (

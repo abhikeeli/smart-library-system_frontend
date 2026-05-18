@@ -36,7 +36,7 @@ const Home = () => {
       <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'center' }}>
         <input 
           type="text" 
-          placeholder="🔍 Search ECE books (e.g., VLSI, Digital, Signals)..." 
+          placeholder="🔍 Search books..." 
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={searchInputStyle}
