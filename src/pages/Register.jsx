@@ -12,12 +12,35 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
-      await api.post('/auth/register', formData);
-      alert("Registration Successful! Please login.");
-      navigate('/login');
+        const response = await api.post('/auth/register', formData);
+
+        console.log("Registration response:", response.data);
+
+        alert("Registration Successful! Please login.");
+        navigate('/login');
+
     } catch (err) {
-      alert("Registration failed. Username might already exist.");
+        console.error("Registration error:", err);
+
+        if (err.response) {
+            console.error("Status:", err.response.status);
+            console.error("Response:", err.response.data);
+
+            alert(
+                `Registration failed.\nStatus: ${err.response.status}\n` +
+                `Error: ${JSON.stringify(err.response.data)}`
+            );
+        } else if (err.request) {
+            console.error("No response received:", err.request);
+
+            alert("Registration failed: No response from backend.");
+        } else {
+            console.error("Request error:", err.message);
+
+            alert(`Registration failed: ${err.message}`);
+        }
     }
   };
 
