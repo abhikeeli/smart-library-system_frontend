@@ -1,48 +1,125 @@
-import React, { createContext, useState, useEffect } from 'react';
-import api from '../api/axiosConfig';
+import React, {
+  createContext,
+  useState,
+  useEffect
+} from 'react';
 
+import api from '../api/axiosConfig';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Start as null (logged out)
 
-  // When the app loads, check if the user is already logged in
+  const [user, setUser] = useState(null);
+
+  // Load saved user when application starts
   useEffect(() => {
+
     const savedUser = localStorage.getItem('user');
+
     if (savedUser && savedUser !== "undefined") {
       setUser(JSON.parse(savedUser));
     }
+
   }, []);
 
+
+  // Get latest user information from backend
   const refreshUser = async () => {
+
     try {
-      // Axios automatically sends the token from localStorage via interceptors
-      const response = await api.get('/auth/me'); 
+
+      const token = localStorage.getItem('token');
+
+      // Don't make request if user isn't logged in
+      if (!token) {
+        return;
+      }
+
+      const response = await api.get('/auth/me');
+
       const updatedUser = response.data.user;
-      console.log(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+
+      console.log(
+        "User score refreshed:",
+        updatedUser.creditScore
+      );
+
+      localStorage.setItem(
+        'user',
+        JSON.stringify(updatedUser)
+      );
+
       setUser(updatedUser);
-      console.log("User score refreshed:", updatedUser.creditScore);
+
     } catch (err) {
-      console.error("Could not refresh user session", err);
+
+      console.error(
+        "Could not refresh user session",
+        err
+      );
+
     }
   };
 
+
+  // Automatically synchronize user data
+  // from backend every 10 seconds
+  useEffect(() => {
+
+    if (!user) {
+      return;
+    }
+
+    // Immediately get latest data
+    refreshUser();
+
+    const interval = setInterval(() => {
+      refreshUser();
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
+  }, [user]);
+
+
   const login = (userData, token) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', token);
+
+    localStorage.setItem(
+      'user',
+      JSON.stringify(userData)
+    );
+
+    localStorage.setItem(
+      'token',
+      token
+    );
+
     setUser(userData);
   };
 
+
   const logout = () => {
+
     localStorage.clear();
+
     setUser(null);
   };
 
+
   return (
-    <UserContext.Provider value={{ user, login, logout ,refreshUser}}>
+    <UserContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        refreshUser
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
+

@@ -27,10 +27,15 @@ const Home = () => {
     }
   };
 
-  // FETCH BOOKS FROM DATABASE
   useEffect(() => {
+  fetchBooks();
+
+  const interval = setInterval(() => {
     fetchBooks();
-  }, [search]);
+  }, 10000); // every 10 seconds
+
+  return () => clearInterval(interval);
+}, [search]);
 
   if (loading) {
     return <div style={{ padding: '20px' }}>Loading Library...</div>;
