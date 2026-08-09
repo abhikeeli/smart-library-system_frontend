@@ -5,6 +5,7 @@ import Home from './pages/Home'; // Move your current Library code to a file nam
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import AdminAddBook from './pages/AdminAddBook';
 
 function App() {
   const { user, logout } = useContext(UserContext);
@@ -47,6 +48,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/admin/add-book" element={<AdminAddBook />} />
       </Routes>
     </Router>
   );
