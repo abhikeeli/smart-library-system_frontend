@@ -16,7 +16,6 @@ const Register = () => {
     try {
         const response = await api.post('/auth/register', formData);
 
-        console.log("Registration response:", response.data);
 
         alert("Registration Successful! Please login.");
         navigate('/login');
