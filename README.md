@@ -1,16 +1,39 @@
-# React + Vite
+# 📚 Smart Library System - Frontend UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 🔗 **Backend Repository:** Looking for the Spring Boot API? Check out the [Smart Library System Backend Repo](https://github.com/abhikeeli/smart-library-system.git).
 
-Currently, two official plugins are available:
+An interactive, responsive single-page web interface built with **React** to browse library catalogs, view real-time physical book availability, manage user checkouts, and view borrowing histories.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Interactive Catalog:** Search and filter books with real-time stock counters aggregated from individual copy statuses.
+- **User Dashboard:** Track currently borrowed items, due dates,
+ and transaction history.
+- **Clean UI & Responsive Layout:** Designed for intuitive navigation across desktop and mobile screens.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## 🛠️ Tech Stack
+
+- **Framework:** React.js
+- **Routing:** React Router DOM
+- **HTTP Client:** Axios 
+- **Styling:** CSS Modules
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Local Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/abhikeeli/smart-library-system_frontend.git](https://github.com/abhikeeli/smart-library-system_frontend.git)
+   cd smart-library-frontend
